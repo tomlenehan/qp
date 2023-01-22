@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from rest_framework import generics, status
 from .serializers import BillSerializer, CreateBillSerializer
-from .models import Bill
+from .models import Bills
 from rest_framework.views import APIView
 from rest_framework.response import Response
 
@@ -10,7 +10,7 @@ from rest_framework.response import Response
 
 
 class BillListView(generics.ListCreateAPIView):
-    queryset = Bill.objects.all()
+    queryset = Bills.objects.all()
     serializer_class = BillSerializer
 
 
@@ -26,7 +26,7 @@ class CreateBillView(APIView):
             name = serializer.data.get('name')
             date = serializer.data.get('date')
             summary = serializer.data.get('summary')
-            vote = Bill(name=name, date=date, summary=summary)
+            vote = Bills(name=name, date=date, summary=summary)
             vote.save()
             return Response(BillSerializer(vote).data, status=status.HTTP_201_CREATED)
 

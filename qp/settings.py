@@ -83,11 +83,11 @@ WSGI_APPLICATION = 'qp.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'qp',
-        'USER': 'tal',
-        'PASSWORD': 'bosco22',
-        'HOST': 'localhost',
-        'PORT': '5432',
+        'NAME': os.getenv('DB_NAME'),
+        'USER': os.getenv('DB_USER'),
+        'PASSWORD': os.getenv('DB_PASSWORD'),
+        'HOST': os.getenv('DB_HOST'),
+        'PORT': os.getenv('DB_PORT'),
     }
 }
 
@@ -135,4 +135,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Put API credentials here
 PROPUBLICA_API_KEY = os.getenv('PROPUBLICA_API_KEY')
-PROPUBLICA_API_URL = 'https://api.propublica.org/congress/v1'
+
+CONGRESS_API_KEY = os.getenv('CONGRESS_API_KEY')

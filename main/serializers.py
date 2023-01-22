@@ -1,13 +1,14 @@
 from rest_framework import serializers
-from .models import Bill
+from .models import Bills
 
 
 class BillSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Bill
+        model = Bills
         fields = ('id', 'name', 'date', 'summary')
+
 
 class CreateBillSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Bill
+        model = Bills
         fields = ('name', 'date', 'summary')
