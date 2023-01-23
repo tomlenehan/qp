@@ -10,9 +10,13 @@ class Command(BaseCommand):
     help = 'Pull bills from the Congress API and save to the database'
 
     def handle(self, *args, **options):
+
+        # max limit 250
+        limit = 10
+
         response = requests.get(
             'https://api.congress.gov/v3/bill',
-            params={'api_key': settings.CONGRESS_API_KEY, 'format': 'json', 'limit': 2}
+            params={'api_key': settings.CONGRESS_API_KEY, 'format': 'json', 'limit': limit}
         )
 
         if response.status_code == 200:

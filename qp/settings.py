@@ -140,5 +140,5 @@ INTERNAL_IPS = ('127.0.0.1', 'your-ip-address')
 
 # Put API credentials here
 PROPUBLICA_API_KEY = os.getenv('PROPUBLICA_API_KEY')
-
 CONGRESS_API_KEY = os.getenv('CONGRESS_API_KEY')
+OPENAI_API_KEY = os.getenv('OPENAI_API_KEY')
