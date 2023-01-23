@@ -1,0 +1,51 @@
+# README
+
+## Introduction
+
+This is a Django and React app that uses the OpenAI API to
+summarize Congressional data.
+
+## Requirements
+
+- Python 3.x
+- Django
+- React
+- OpenAI package (can be installed via pip)
+
+## Installation
+
+1. Clone the repository
+
+git clone https://github.com/yourusername/yourrepo.git
+
+2. Install the requirements
+
+pip install -r requirements.txt
+
+3. Run the migrations
+
+python manage.py migrate
+
+4. Start the development server
+
+5. In a separate terminal, navigate to the `frontend` directory and start the React development server
+
+cd frontend
+npm start
+
+6. Go to http://localhost:3000/ in your browser to view the app.
+
+## Usage
+
+1. Enter a URL in the input field
+2. Click the "Summarize" button
+3. The summarized text will appear below the button.
+
+## Note
+
+Make sure you have a openai api key, if not create it and add it to the settings
+
+
+
+
+
