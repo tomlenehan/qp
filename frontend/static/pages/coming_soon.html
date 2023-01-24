@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Coming Soon</title>
+  <style>
+    /* Add some styles to make the page look nice */
+    body {
+      background-color: #f5f5f5;
+      font-family: Arial, sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+    h1 {
+      font-size: 4em;
+      margin: 20px 0;
+    }
+    p {
+      font-size: 2em;
+      margin: 20px 0;
+    }
+
+    /* Center the text to the middle of the page */
+    h1, p {
+        text-align: center;
+    }
+    .coming-soon {
+        display: inline-block;
+        margin: 0 auto;
+    }
+
+    /* Add a keyframe animation for the "coming soon" text */
+    @keyframes fadeInOut {
+      0% {
+        opacity: 0;
+      }
+      20% {
+        opacity: 1;
+      }
+      80% {
+        opacity: 1;
+      }
+      100% {
+        opacity: 0;
+      }
+    }
+    /* Apply the animation to the "coming soon" text */
+    .coming-soon {
+      animation: fadeInOut 5s infinite;
+    }
+  </style>
+</head>
+<body>
+  <div>
+    <h1>Question Politics</h1>
+    <p>
+      <span class="coming-soon">Building</span>
+    </p>
+  </div>
+</body>
+</html>

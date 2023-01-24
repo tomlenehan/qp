@@ -10,30 +10,43 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
 
-        # max limit 250
-        limit = 10
+        # Initialize variables
+        offset = 0
+        limit = 50
+        member_count = 700
 
-        response = requests.get(
-            'https://api.congress.gov/v3/member',
-            params={'api_key': settings.CONGRESS_API_KEY, 'format': 'json', 'limit': limit}
-        )
+        while offset <= member_count:
+            response = requests.get(
+                'https://api.congress.gov/v3/member',
+                params={'api_key': settings.CONGRESS_API_KEY, 'format': 'json', 'offset': offset, 'limit': limit}
+            )
 
-        if response.status_code == 200:
-            data = response.json()
-            members = data['members']
-            with transaction.atomic():
-                for member in members:
-                    member_obj = Members(bioguide_id=member.get('bioguideId', None),
-                                         district=member.get('district', None),
-                                         name=member.get('name', None),
-                                         party=member.get('party', None),
-                                         chamber=member.get('chamber', None),
-                                         start_date=member.get('startDate', None),
-                                         end_date=member.get('endDate', None),
-                                         state=member.get('state', None),
-                                         url=member.get('url', None))
-                    member_obj.save()
-        else:
-            print(f'Error: {response.status_code}')
+            if response.status_code == 200:
+                data = response.json()
+                members = data['members']
+                with transaction.atomic():
+                    for member in members:
+                        chamber = list(member.get('served').keys())[0]
+                        start = member.get('served').get(chamber)[0].get('start')
+                        end = member.get('served').get(chamber)[0].get('end')
 
+                        member_obj, created = Members.objects.get_or_create(
+                            bioguide_id=member.get('bioguideId', None),
+                            defaults={
+                                'district': member.get('district', None),
+                                'name': member.get('name', None),
+                                'party': member.get('party', None),
+                                'chamber': chamber,
+                                'start_date': start,
+                                'end_date': end,
+                                'state': member.get('state', None),
+                                'url': member.get('url', None),
+                                'image_url': member.get('depiction').get('imageUrl')
+                            }
+                        )
+                        if created:
+                            member_obj.save()
+                offset += limit
+            else:
+                print(f'Error: {response.status_code}')
         print('Members imported successfully')

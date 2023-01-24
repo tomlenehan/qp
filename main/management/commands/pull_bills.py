@@ -26,13 +26,13 @@ class Command(BaseCommand):
                 for bill in bills:
                     bill_obj = Bills(
                         number=bill['number'],
+                        title=bill['title'],
+                        type=bill['type'],
                         congress=bill['congress'],
                         latest_action_date=bill['latestAction']['actionDate'],
                         latest_action_text=bill['latestAction']['text'],
                         origin_chamber=bill['originChamber'],
                         origin_chamber_code=bill['originChamberCode'],
-                        title=bill['title'],
-                        type=bill['type'],
                         update_date=bill['updateDate'],
                         url=bill['url']
                     )

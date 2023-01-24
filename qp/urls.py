@@ -15,10 +15,14 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.views.static import serve
+
+from qp import settings
 
 urlpatterns = [
+    path('', include('frontend.urls')),
+    # for maintenance
+    # path('', serve, {'document_root': settings.STATIC_ROOT, 'path': '/pages/coming_soon.html'}),
     path('admin/', admin.site.urls),
     path('main/', include('main.urls')),
-    path('', include('frontend.urls')),
-    path('__debug__/', include('debug_toolbar.urls')),
 ]
