@@ -25,15 +25,19 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.getenv('SECRET_KEY')
 
-# SECURITY WARNING: don't run with debug turned on in production!
+#SECURITY WARNING: don't run with debug turned on in production!
 if os.getenv('ENVIRONMENT') == 'development':
     DEBUG = True
 else:
-    DEBUG = False
+    DEBUG = True
 
 MAINTENANCE_MODE = os.getenv('MAINTENANCE_MODE')
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1',
+                 '0.0.0.0',
+                 'localhost',
+                 'questionpolitics.org',
+                 'www.questionpolitics.org']
 
 # Application definition
 
@@ -47,7 +51,6 @@ INSTALLED_APPS = [
     'main.apps.ApiConfig',
     'rest_framework',
     'frontend.apps.FrontendConfig',
-    'debug_toolbar',
 ]
 
 MIDDLEWARE = [
@@ -58,7 +61,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    # 'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
 
 ROOT_URLCONF = 'qp.urls'
@@ -112,6 +114,25 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+
+# Login settings
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'file': {
+            'class': 'logging.FileHandler',
+            'filename': 'logs/dev/django.log',
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['file'],
+            'level': os.getenv('DJANGO_LOG_LEVEL', 'DEBUG'),
+        },
+    },
+}
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
