@@ -46,6 +46,7 @@ class Command(BaseCommand):
                         'gender': member.get('gender'),
                         'party': member.get('party'),
                         'leadership_role': member.get('leadership_role'),
+                        'img_url': 'https://www.congress.gov/img/member/'+member.get('id')+'_200.jpg',
                         'twitter_account': member.get('twitter_account'),
                         'facebook_account': member.get('facebook_account'),
                         'youtube_account': member.get('youtube_account'),

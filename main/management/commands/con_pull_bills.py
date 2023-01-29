@@ -12,7 +12,7 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
 
         # max limit 250
-        limit = 10
+        limit = 50
 
         response = requests.get(
             'https://api.congress.gov/v3/bill',
