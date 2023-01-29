@@ -8,6 +8,9 @@ import Typography from "@material-ui/core/Typography";
 
 const useStyles = makeStyles((theme) => ({
     root: {
+        flexGrow: 1,
+    },
+    homePageContainer: {
         textAlign: 'center',
         backgroundColor: '#076AE0',
         color: '#FFFFFF',
@@ -16,10 +19,12 @@ const useStyles = makeStyles((theme) => ({
     mainLogo: {
         width: '50%',
         margin: '0 auto',
+        display: 'block',
     },
     smallLogo: {
         width: '25%',
         margin: '0 auto',
+        display: 'block',
     },
 }));
 
@@ -29,14 +34,16 @@ const HomePage = () => {
     return (
         <div className={classes.root}>
             <AppBar/>
-            <Grid container>
-                <Grid item xs={12}>
-                    <img src={QP_America_Logo} alt="QP America Logo" className={classes.mainLogo}/>
+            <div className={classes.homePageContainer}>
+                <Grid container>
+                    <Grid item xs={12}>
+                        <img src={QP_America_Logo} alt="QP America Logo" className={classes.mainLogo}/>
+                    </Grid>
+                    <Grid item xs={12}>
+                        <img src={QP_Text} alt="QP America Small Logo" className={classes.smallLogo}/>
+                    </Grid>
                 </Grid>
-                <Grid item xs={12}>
-                    <img src={QP_Text} alt="QP America Small Logo" className={classes.smallLogo}/>
-                </Grid>
-            </Grid>
+            </div>
         </div>
     );
 }

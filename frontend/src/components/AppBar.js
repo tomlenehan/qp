@@ -1,45 +1,57 @@
 import React from "react";
 import {
-  AppBar as MuiAppBar,
-  Toolbar,
-  Typography,
-  IconButton,
-  Button,
-  makeStyles,
+    AppBar as MuiAppBar,
+    Toolbar,
+    IconButton,
+    Button,
+    makeStyles, Grid,
 } from "@material-ui/core";
-import TwitterIcon from "@material-ui/icons/Twitter";
-import { Link } from "react-router-dom";
+import {Link} from "react-router-dom";
+import QP_Logo from '../../static/images/QP-Logo.png';
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-  },
-  menuButton: {
-    marginRight: theme.spacing(2),
-  },
-  title: {
-    flexGrow: 1,
-  },
+    root: {
+        flexGrow: 1,
+    },
+    menuButton: {
+        fontFamily: 'BebasNeue',
+        marginRight: theme.spacing(2),
+    },
+    title: {
+        flexGrow: 1,
+    },
+    logo: {
+        width: '50px',
+        marginRight: '10px',
+    },
+    toolbar:{
+        fontFamily: 'BebasNeue',
+        justifyContent: 'flex-end',
+    }
 }));
 
 const AppBar = () => {
-  const classes = useStyles();
+    const classes = useStyles();
 
-  return (
-    <MuiAppBar position="static">
-      <Toolbar>
-        <Typography variant="h6" className={classes.title}>
-          Question Politics
-        </Typography>
-        <Button href="/bills" component={Link} to="/bills" >
-          Bills
-        </Button>
-        <Button color="inherit" component={Link} to="/members">
-          Members
-        </Button>
-      </Toolbar>
-    </MuiAppBar>
-  );
+    return (
+           <MuiAppBar position="static">
+            <Toolbar className={classes.toolbar}>
+                <Grid container justify="flex-start" alignItems="center">
+                    <Button color="inherit" component={Link} to="/">
+                        <img src={QP_Logo} alt="QP-Logo" className={classes.logo}/>
+                    </Button>
+                </Grid>
+                <Grid container justify="flex-end" alignItems="center">
+                    <Button color="inherit" component={Link} to="/bills">
+                        Bills
+                    </Button>
+                    <Button color="inherit" component={Link} to="/members">
+                        Members
+                    </Button>
+                </Grid>
+            </Toolbar>
+        </MuiAppBar>
+    );
 };
 
 export default AppBar;
