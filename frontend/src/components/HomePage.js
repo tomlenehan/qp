@@ -1,7 +1,7 @@
 import React from "react";
 import AppBar from "./AppBar";
-import QP_America_Logo from '../../static/images/QP-America-Logo.png';
-import QP_Text from "../../static/images/QP-Text.png";
+import QP_America_Logo from '../../static/images/QP-America-Logo-LG.png';
+import QP_Text from "../../static/images/QP-Text-LG.png";
 import Grid from "@material-ui/core/Grid";
 import {makeStyles} from '@material-ui/core/styles';
 import Typography from "@material-ui/core/Typography";
@@ -22,10 +22,11 @@ const useStyles = makeStyles((theme) => ({
         display: 'block',
     },
     smallLogo: {
-        width: '25%',
+        width: '30%',
         margin: '0 auto',
         display: 'block',
     },
+
 }));
 
 const HomePage = () => {

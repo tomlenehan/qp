@@ -9,18 +9,30 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import LoadingSpinner from './LoadingSpinner';
-import AppBar from "./AppBar"; // import your loading spinner component
+import AppBar from "./AppBar";
 
 const useStyles = makeStyles((theme) => ({
     root: {
         flexGrow: 1,
+        overflow: 'scroll',
     },
     card: {
         maxWidth: 345,
         margin: theme.spacing(2),
+        position: 'relative',
     },
     media: {
         height: 140,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+    },
+    memberName: {
+        position: 'absolute',
+        bottom: theme.spacing(1),
+        left: theme.spacing(1),
+        color: 'white',
+        fontWeight: 'bold',
+        textShadow: '1px 1px 2px rgba(0, 0, 0, 0.5)',
     },
 }));
 
@@ -42,7 +54,9 @@ const MembersPage = (props) => {
     return (
         <div className={classes.root}>
             <AppBar/>
-            {loading ? <LoadingSpinner/> :
+            {loading ? (
+                <LoadingSpinner/>
+            ) : (
                 <Grid container spacing={3}>
                     {members.map((member) => (
                         <Grid item xs={12} sm={4} key={member.member_id}>
@@ -50,18 +64,32 @@ const MembersPage = (props) => {
                                 <CardActionArea>
                                     <CardMedia
                                         className={classes.media}
-                                        image={member.image_url}
+                                        image={member.img_url}
                                         title="Member Image"
                                     />
-                                    <CardContent>
-                                        <Typography gutterBottom variant="h5" component="h2">
-                                            {member.first_name} {member.last_name}
-                                        </Typography>
-                                        <Typography variant="body2" color="textSecondary" component="p">
-                                            {member.email}
-                                        </Typography>
-                                    </CardContent>
+                                    <Typography
+                                        className={classes.memberName}
+                                        style={{
+                                            backgroundColor: "white",
+                                            color: "black",
+                                            position: "absolute",
+                                            bottom: "5%",
+                                            left: "5%",
+                                            padding: "5px",
+                                        }}
+                                    >
+                                        {member.first_name} {member.last_name}
+                                    </Typography>
                                 </CardActionArea>
+                                <CardContent>
+                                    <Typography
+                                        variant="body2"
+                                        color="textSecondary"
+                                        component="p"
+                                    >
+                                        {member.email}
+                                    </Typography>
+                                </CardContent>
                                 <CardActions>
                                     <Button size="small" color="primary">
                                         Learn More
@@ -71,9 +99,8 @@ const MembersPage = (props) => {
                         </Grid>
                     ))}
                 </Grid>
-            }
+            )}
         </div>
     );
 }
-
 export default MembersPage;

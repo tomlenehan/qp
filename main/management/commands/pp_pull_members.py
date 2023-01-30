@@ -28,10 +28,6 @@ class Command(BaseCommand):
             response = requests.get(query, headers={'X-API-Key': api_key})
             data = response.json()
             for member in data['results'][0]['members']:
-                if member['id'] == '':
-                    continue
-                # if member.get('missed_votes_pct', None):
-                #     break
                 member_obj, created = Members.objects.update_or_create(
                     member_id=member.get('id'),
                     defaults={
@@ -46,7 +42,7 @@ class Command(BaseCommand):
                         'gender': member.get('gender'),
                         'party': member.get('party'),
                         'leadership_role': member.get('leadership_role'),
-                        'img_url': 'https://www.congress.gov/img/member/'+member.get('id')+'_200.jpg',
+                        'img_url': 'https://www.congress.gov/img/member/'+member.get('id')[0].lower() + member.get('id')[1:]+'.jpg',
                         'twitter_account': member.get('twitter_account'),
                         'facebook_account': member.get('facebook_account'),
                         'youtube_account': member.get('youtube_account'),

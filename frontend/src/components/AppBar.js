@@ -25,8 +25,10 @@ const useStyles = makeStyles((theme) => ({
         marginRight: '10px',
     },
     toolbar:{
-        fontFamily: 'BebasNeue',
         justifyContent: 'flex-end',
+    },
+    button: {
+        fontFamily: 'BebasNeue',
     }
 }));
 
