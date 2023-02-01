@@ -1,9 +1,22 @@
 import os
-
 import requests
 from django.core.management import BaseCommand
-
 from main.models import Members
+
+
+# Attempt to get profile image from govtrack.us
+def get_profile_image(member_id, govtrack_id):
+    url = 'https://www.govtrack.us/static/legislator-photos/' + govtrack_id + '-200px.jpeg'
+    headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64; Trident/7.0; AS; rv:11.0) like Gecko'}
+    response = requests.get(url, headers=headers)
+    if response.status_code == 200:
+        file_name = member_id + '_200.jpg'
+        file_path = 'frontend/static/images/profile_images/' + file_name
+        with open(file_path, 'wb') as f:
+            f.write(response.content)
+        return file_name
+    else:
+        return 'DEFAULT_200.jpg'
 
 
 class Command(BaseCommand):
@@ -28,6 +41,9 @@ class Command(BaseCommand):
             response = requests.get(query, headers={'X-API-Key': api_key})
             data = response.json()
             for member in data['results'][0]['members']:
+
+                img_file = get_profile_image(member.get('id'), member.get('govtrack_id'))
+
                 member_obj, created = Members.objects.update_or_create(
                     member_id=member.get('id'),
                     defaults={
@@ -42,7 +58,7 @@ class Command(BaseCommand):
                         'gender': member.get('gender'),
                         'party': member.get('party'),
                         'leadership_role': member.get('leadership_role'),
-                        'img_url': 'https://www.congress.gov/img/member/'+member.get('id')[0].lower() + member.get('id')[1:]+'.jpg',
+                        'img_file': img_file,
                         'twitter_account': member.get('twitter_account'),
                         'facebook_account': member.get('facebook_account'),
                         'youtube_account': member.get('youtube_account'),
@@ -79,7 +95,6 @@ class Command(BaseCommand):
                         'votes_against_party_pct': member.get('votes_against_party_pct')
                     }
                 )
-
                 if created:
                     self.stdout.write(
                         self.style.SUCCESS(f'Successfully created member {member["first_name"]} {member["last_name"]}'))

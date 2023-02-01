@@ -1,38 +1,25 @@
 import React, {useState, useEffect} from 'react';
-import {makeStyles} from '@material-ui/core/styles';
-import Grid from '@material-ui/core/Grid';
-import Card from '@material-ui/core/Card';
-import CardActionArea from '@material-ui/core/CardActionArea';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
-import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
+import {
+    makeStyles, ThemeProvider, Card, CardActionArea, CardActions,
+    CardContent, CardMedia, Button, Typography, Grid
+} from '@material-ui/core';
+import TwitterIcon from "@material-ui/icons/Twitter";
+import AppBar from './AppBar';
 import LoadingSpinner from './LoadingSpinner';
-import AppBar from "./AppBar";
+import theme from './Theme';
+
 
 const useStyles = makeStyles((theme) => ({
     root: {
         flexGrow: 1,
-        overflow: 'scroll',
+        overflowY: 'scroll',
     },
     card: {
-        maxWidth: 345,
+        maxWidth: 245,
         margin: theme.spacing(2),
-        position: 'relative',
     },
     media: {
-        height: 140,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-    },
-    memberName: {
-        position: 'absolute',
-        bottom: theme.spacing(1),
-        left: theme.spacing(1),
-        color: 'white',
-        fontWeight: 'bold',
-        textShadow: '1px 1px 2px rgba(0, 0, 0, 0.5)',
+        height: 200,
     },
 }));
 
@@ -48,59 +35,55 @@ const MembersPage = (props) => {
             .then(data => {
                 setMembers(data.members);
                 setLoading(false);
+            })
+            .catch(error => {
+                console.error(error);
+                setLoading(false);
             });
     }, []);
 
     return (
         <div className={classes.root}>
             <AppBar/>
-            {loading ? (
-                <LoadingSpinner/>
-            ) : (
-                <Grid container spacing={3}>
-                    {members.map((member) => (
-                        <Grid item xs={12} sm={4} key={member.member_id}>
-                            <Card className={classes.card}>
-                                <CardActionArea>
-                                    <CardMedia
-                                        className={classes.media}
-                                        image={member.img_url}
-                                        title="Member Image"
-                                    />
-                                    <Typography
-                                        className={classes.memberName}
-                                        style={{
-                                            backgroundColor: "white",
-                                            color: "black",
-                                            position: "absolute",
-                                            bottom: "5%",
-                                            left: "5%",
-                                            padding: "5px",
-                                        }}
-                                    >
-                                        {member.first_name} {member.last_name}
-                                    </Typography>
-                                </CardActionArea>
-                                <CardContent>
-                                    <Typography
-                                        variant="body2"
-                                        color="textSecondary"
-                                        component="p"
-                                    >
-                                        {member.email}
-                                    </Typography>
-                                </CardContent>
-                                <CardActions>
-                                    <Button size="small" color="primary">
-                                        Learn More
-                                    </Button>
-                                </CardActions>
-                            </Card>
-                        </Grid>
-                    ))}
-                </Grid>
-            )}
+            <ThemeProvider theme={theme}>
+                {loading ? <LoadingSpinner/> :
+                    <Grid container spacing={3}>
+                        {members.map((member) => (
+                            <Grid item xs={12} sm={3} key={member.member_id}>
+                                <Card className={classes.card}>
+                                    <CardActionArea>
+                                        <CardMedia
+                                            className={classes.media}
+                                            image={`/static/images/profile_images/${member.img_file}`}
+                                            title="Member Image"
+                                        />
+                                        <CardContent>
+                                            <Typography gutterBottom variant="h5" component="h2">
+                                                {member.short_title} {member.first_name} {member.last_name}
+                                            </Typography>
+                                            <Typography variant="body2" color="textSecondary" component="p">
+                                                {member.title}, {member.state}
+                                            </Typography>
+                                        </CardContent>
+                                    </CardActionArea>
+                                    <CardActions>
+                                        <Button size="small" color="primary">
+                                            Learn More
+                                        </Button>
+                                        {member.twitter_account &&
+                                            <Button size="small" href={`https://twitter.com/${member.twitter_account}`}
+                                                    target="_blank" rel="noopener noreferrer">
+                                                <TwitterIcon fontSize="small"/>
+                                            </Button>}
+                                    </CardActions>
+                                </Card>
+                            </Grid>
+                        ))}
+                    </Grid>
+                }
+            </ThemeProvider>
         </div>
     );
 }
+
 export default MembersPage;

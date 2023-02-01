@@ -1,7 +1,38 @@
-import React, { useState, useEffect } from "react";
+import React, {useState, useEffect} from "react";
 import AppBar from "./AppBar";
 import LoadingSpinner from "./LoadingSpinner";
-import { Grid, Card, CardActionArea, CardMedia, Typography, CardContent, CardActions, Button } from "@material-ui/core";
+import {
+    makeStyles,
+    ThemeProvider,
+    Accordion,
+    AccordionSummary,
+    AccordionDetails,
+    Typography,
+    Button
+} from "@material-ui/core";
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import theme from "./Theme";
+
+const useStyles = makeStyles((theme) => ({
+    root: {
+        flexGrow: 1,
+        overflowY: 'scroll',
+    },
+    accordion: {
+        margin: theme.spacing(2),
+    },
+    billTitle: {
+        fontSize: 20,
+        fontWeight: 'bold',
+    },
+    summary: {
+        fontSize: 16,
+        color: 'gray',
+    },
+    accordionDetails: {
+        display: 'block',
+    },
+}));
 
 const BillsPage = () => {
     const [bills, setBills] = useState([]);
@@ -10,45 +41,45 @@ const BillsPage = () => {
 
     useEffect(() => {
         fetch('/api/get_bills/')
-        .then(res => res.json())
-        .then(data => {
-            setBills(data);
-            setLoading(false);
-        })
-        .catch(error => {
-            console.error(error);
-            setLoading(false);
-        });
+            .then(response => response.json())
+            .then(data => {
+                setBills(data.bills);
+                setLoading(false);
+            })
+            .catch(error => {
+                console.error(error);
+                setLoading(false);
+            });
     }, []);
 
     return (
         <div className={classes.root}>
             <AppBar/>
-            {loading ? <LoadingSpinner/> :
-                <Grid container spacing={3}>
-                    {bills.map((bill) => (
-                        <Grid item xs={12} sm={4} key={bill.bill_id}>
-                            <Card className={classes.card}>
-                                <CardActionArea>
-                                    <Typography className={classes.billTitle}>
-                                        {bill.short_title}
-                                    </Typography>
-                                </CardActionArea>
-                                <CardContent>
-                                    <Typography variant="body2" color="textSecondary" component="p">
-                                        {bill.summary}
-                                    </Typography>
-                                </CardContent>
-                                <CardActions>
+            <ThemeProvider theme={theme}>
+                {loading ? (
+                    <LoadingSpinner/>
+                ) : (
+                    <div>
+                        {bills.map((bill) => (
+                            <Accordion key={bill.bill_id} className={classes.accordion}>
+                                <AccordionSummary
+                                    expandIcon={<ExpandMoreIcon/>}
+                                    aria-controls="panel1a-content"
+                                    id="panel1a-header"
+                                >
+                                    <Typography className={classes.billTitle}>{bill.short_title}</Typography>
+                                </AccordionSummary>
+                                <AccordionDetails className={classes.accordionDetails}>
+                                    <Typography className={classes.summary}>{bill.summary}</Typography>
                                     <Button size="small" color="primary">
                                         Learn More
                                     </Button>
-                                </CardActions>
-                            </Card>
-                        </Grid>
+                                </AccordionDetails>
+                            </Accordion>
                         ))}
-                </Grid>
-            }
+                    </div>
+                )}
+            </ThemeProvider>
         </div>
     );
 };

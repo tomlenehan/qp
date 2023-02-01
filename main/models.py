@@ -94,7 +94,7 @@ class Members(models.Model):
     gender = models.CharField(max_length=10, blank=True, null=True)
     party = models.CharField(max_length=10, blank=True, null=True)
     leadership_role = models.CharField(max_length=50, blank=True, null=True)
-    img_url = models.URLField(blank=True, null=True)
+    img_file = models.CharField(max_length=255, blank=True, null=True)
     twitter_account = models.CharField(max_length=255, blank=True, null=True)
     facebook_account = models.CharField(max_length=255, blank=True, null=True)
     youtube_account = models.CharField(max_length=255, blank=True, null=True)

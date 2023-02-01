@@ -7,8 +7,3 @@ class BillSerializer(serializers.ModelSerializer):
         model = Bills
         fields = ('id', 'name', 'date', 'summary')
 
-
-class CreateBillSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Bills
-        fields = ('name', 'date', 'summary')

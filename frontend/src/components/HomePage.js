@@ -1,10 +1,11 @@
 import React from "react";
-import AppBar from "./AppBar";
-import QP_America_Logo from '../../static/images/QP-America-Logo-LG.png';
-import QP_Text from "../../static/images/QP-Text-LG.png";
+import QP_America_Logo from '../../static/images/logos/QP-America-Logo-LG.png';
+import QP_Text from "../../static/images/logos/QP-Text-LG.png";
 import Grid from "@material-ui/core/Grid";
 import {makeStyles} from '@material-ui/core/styles';
 import Typography from "@material-ui/core/Typography";
+import AppBar from "./AppBar";
+import theme from './Theme';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -12,9 +13,8 @@ const useStyles = makeStyles((theme) => ({
     },
     homePageContainer: {
         textAlign: 'center',
-        backgroundColor: '#076AE0',
-        color: '#FFFFFF',
-        fontFamily: 'BebasNeue',
+        // backgroundColor: '#076AE0',
+        // color: '#FFFFFF',
     },
     mainLogo: {
         width: '50%',

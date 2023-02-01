@@ -149,6 +149,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "frontend/build"),
+    os.path.join(BASE_DIR, "frontend/static"),
 ]
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
@@ -163,9 +164,12 @@ INTERNAL_IPS = ('127.0.0.1', 'your-ip-address')
 # Put API credentials here
 PROPUBLICA_API_KEY = os.getenv('PROPUBLICA_API_KEY')
 CONGRESS_API_KEY = os.getenv('CONGRESS_API_KEY')
+GOV_INFO_API_KEY = os.getenv('GOVINFO_API_KEY')
 OPENAI_API_KEY = os.getenv('OPENAI_API_KEY')
 
 # Twitter API credentials
 TWITTER_API_KEY = os.getenv('TWITTER_API_KEY')
 TWITTER_API_SECRET_KEY = os.getenv('TWITTER_API_SECRET_KEY')
 TWITTER_ACCESS_TOKEN = os.getenv('TWITTER_ACCESS_TOKEN')
+
+
