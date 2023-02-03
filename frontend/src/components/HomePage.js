@@ -6,6 +6,7 @@ import {makeStyles} from '@material-ui/core/styles';
 import Typography from "@material-ui/core/Typography";
 import AppBar from "./AppBar";
 import theme from './Theme';
+import {ThemeProvider} from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -13,8 +14,6 @@ const useStyles = makeStyles((theme) => ({
     },
     homePageContainer: {
         textAlign: 'center',
-        // backgroundColor: '#076AE0',
-        // color: '#FFFFFF',
     },
     mainLogo: {
         width: '50%',
@@ -35,16 +34,23 @@ const HomePage = () => {
     return (
         <div className={classes.root}>
             <AppBar/>
-            <div className={classes.homePageContainer}>
-                <Grid container>
-                    <Grid item xs={12}>
-                        <img src={QP_America_Logo} alt="QP America Logo" className={classes.mainLogo}/>
+            <ThemeProvider theme={theme}>
+                <div className={classes.homePageContainer}>
+                    <Grid container>
+                        <Grid item xs={12}>
+                            <img src={QP_America_Logo} alt="QP America Logo" className={classes.mainLogo}/>
+                        </Grid>
+                        <Grid item xs={12}>
+                            <img src={QP_Text} alt="QP America Small Logo" className={classes.smallLogo}/>
+                        </Grid>
+                        <Grid item xs={12}>
+                            <Typography>
+                                <h4>Making The Legislative Process Make Sense</h4>
+                            </Typography>
+                        </Grid>
                     </Grid>
-                    <Grid item xs={12}>
-                        <img src={QP_Text} alt="QP America Small Logo" className={classes.smallLogo}/>
-                    </Grid>
-                </Grid>
-            </div>
+                </div>
+            </ThemeProvider>
         </div>
     );
 }
