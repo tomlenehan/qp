@@ -13,19 +13,21 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         api_key = os.getenv('PROPUBLICA_API_KEY')
         url = 'https://api.propublica.org/congress/v1'
-        # query_type = 'active'
         query_type = 'active'
+        # query_type = 'introduced'
         congress = '118'
 
         for i in range(2):
 
-            if i == 0:
-                chamber = 'house'
-            else:
-                chamber = 'senate'
+            # if i == 0:
+            #     chamber = 'house'
+            # else:
+            #     chamber = 'senate'
+
+            chamber = 'both'
+            query_type = 'passed'
 
             query = url+'/'+congress+'/'+chamber+'/bills/'+query_type+'.json'
-            query2 = "https://api.propublica.org/congress/v1/115/house/bills/introduced.json"
 
             response = requests.get(query, headers={'X-API-Key': api_key})
             data = response.json()

@@ -42,7 +42,8 @@ class Command(BaseCommand):
             data = response.json()
             for member in data['results'][0]['members']:
 
-                img_file = get_profile_image(member.get('id'), member.get('govtrack_id'))
+                # img_file = get_profile_image(member.get('id'), member.get('govtrack_id'))
+                full_name = f"{member.get('first_name')} {member.get('last_name')}"
 
                 member_obj, created = Members.objects.update_or_create(
                     member_id=member.get('id'),
@@ -53,12 +54,13 @@ class Command(BaseCommand):
                         'first_name': member.get('first_name'),
                         'middle_name': member.get('middle_name'),
                         'last_name': member.get('last_name'),
+                        'full_name': full_name,
                         'suffix': member.get('suffix'),
                         'date_of_birth': member.get('date_of_birth'),
                         'gender': member.get('gender'),
                         'party': member.get('party'),
                         'leadership_role': member.get('leadership_role'),
-                        'img_file': img_file,
+                        # 'img_file': img_file,
                         'twitter_account': member.get('twitter_account'),
                         'facebook_account': member.get('facebook_account'),
                         'youtube_account': member.get('youtube_account'),

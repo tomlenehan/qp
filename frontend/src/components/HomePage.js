@@ -5,25 +5,20 @@ import Grid from "@material-ui/core/Grid";
 import {makeStyles} from '@material-ui/core/styles';
 import Typography from "@material-ui/core/Typography";
 import AppBar from "./AppBar";
+import Footer from "./Footer";
 import theme from './Theme';
 import {ThemeProvider} from "@material-ui/core";
+
 
 const useStyles = makeStyles((theme) => ({
     root: {
         flexGrow: 1,
-    },
-    homePageContainer: {
+    }, homePageContainer: {
         textAlign: 'center',
-    },
-    mainLogo: {
-        width: '50%',
-        margin: '0 auto',
-        display: 'block',
-    },
-    smallLogo: {
-        width: '30%',
-        margin: '0 auto',
-        display: 'block',
+    }, mainLogo: {
+        width: '50%', margin: '0 auto', display: 'block',
+    }, smallLogo: {
+        width: '30%', margin: '0 auto', display: 'block',
     },
 
 }));
@@ -31,8 +26,7 @@ const useStyles = makeStyles((theme) => ({
 const HomePage = () => {
     const classes = useStyles();
 
-    return (
-        <div className={classes.root}>
+    return (<div className={classes.root}>
             <AppBar/>
             <ThemeProvider theme={theme}>
                 <div className={classes.homePageContainer}>
@@ -50,6 +44,7 @@ const HomePage = () => {
                         </Grid>
                     </Grid>
                 </div>
+                <Footer/>
             </ThemeProvider>
         </div>
     );

@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "webpack --mode development --watch",
+    "dev": "webpack-dev-server --mode development --hot",
+    "debug": "webpack-dev-server --mode development --hot --devtool source-map",
     "build": "webpack --mode production"
   },
   "keywords": [],
@@ -25,10 +26,11 @@
     "@emotion/styled": "^11.10.5",
     "@material-ui/core": "^4.12.4",
     "@material-ui/icons": "^4.11.3",
+    "@material-ui/lab": "^4.0.0-alpha.61",
     "@mui/material": "^5.11.5",
     "babel-loader": "^9.1.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "react-router-dom": "^5.2.0"
+    "react-router-dom": "^6.8.0"
   }
 }

@@ -1,22 +1,17 @@
-import React, {Component} from "react";
-import ReactDOM from "react-dom";
+import React from "react";
+import {Routes, Route, BrowserRouter, createSearchParams} from "react-router-dom";
 import HomePage from "./HomePage";
-import BillsPage from './BillsPage';
-import MembersPage from './MembersPage';
-import {BrowserRouter, Route} from 'react-router-dom';
+import BillsPage from "./BillsPage";
+import MembersPage from "./MembersPage";
 
-
-export default class App extends Component {
-  render() {
+export default function App() {
     return (
         <BrowserRouter>
-            <Route exact path="/" component={HomePage} />
-            <Route path="/bills" component={BillsPage}/>
-            <Route path="/members" component={MembersPage}/>
+            <Routes>
+                <Route path="/" element={<HomePage />} />
+                <Route path="/bills" element={<BillsPage />} />
+                <Route path="/members" element={<MembersPage />} />
+            </Routes>
         </BrowserRouter>
     );
-  }
 }
-
-const appDiv = document.getElementById("app");
-ReactDOM.render(<App />, appDiv);

@@ -28,7 +28,7 @@ const AppBar = () => {
         <ThemeProvider theme={theme}>  {/* Wrap the component with the ThemeProvider */}
             <MuiAppBar position="static">
                 <Toolbar className={classes.toolbar}>
-                    <Grid container justify="flex-start" alignItems="center">
+                    <Grid container justifyContent="flex-start" alignItems="center">
                         <Button color="inherit" component={Link} to="/">
                             <img
                                 src={QP_Logo}
@@ -37,7 +37,7 @@ const AppBar = () => {
                             />
                         </Button>
                     </Grid>
-                    <Grid container justify="flex-end" alignItems="center">
+                    <Grid container justifyContent="flex-end" alignItems="center">
                         <Button color="inherit" component={Link} to="/bills">
                             Bills
                         </Button>

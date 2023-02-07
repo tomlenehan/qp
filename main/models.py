@@ -89,6 +89,7 @@ class Members(models.Model):
     first_name = models.CharField(max_length=255, blank=True, null=True)
     middle_name = models.CharField(max_length=255, blank=True, null=True)
     last_name = models.CharField(max_length=255, blank=True, null=True)
+    full_name = models.CharField(max_length=255, blank=True, null=True)
     suffix = models.CharField(max_length=10, blank=True, null=True)
     date_of_birth = models.DateField(blank=True, null=True)
     gender = models.CharField(max_length=10, blank=True, null=True)
@@ -131,7 +132,9 @@ class Members(models.Model):
     votes_against_party_pct = models.FloatField(blank=True, null=True)
 
     def __str__(self):
-        return self.first_name + ' ' + self.last_name
+        return self.last_name + ', ' + self.first_name
+
+
 
 
 class Statements(models.Model):
