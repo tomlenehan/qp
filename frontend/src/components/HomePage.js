@@ -13,6 +13,9 @@ import {ThemeProvider} from "@material-ui/core";
 const useStyles = makeStyles((theme) => ({
     root: {
         flexGrow: 1,
+        overflowY: 'scroll',
+        justifyContent: 'center',
+        height: '100vh',
     }, homePageContainer: {
         textAlign: 'center',
     }, mainLogo: {
@@ -20,15 +23,15 @@ const useStyles = makeStyles((theme) => ({
     }, smallLogo: {
         width: '30%', margin: '0 auto', display: 'block',
     },
-
 }));
 
 const HomePage = () => {
     const classes = useStyles();
 
-    return (<div className={classes.root}>
-            <AppBar/>
-            <ThemeProvider theme={theme}>
+    return (
+        <ThemeProvider theme={theme}>
+            <div className={classes.root}>
+                <AppBar/>
                 <div className={classes.homePageContainer}>
                     <Grid container>
                         <Grid item xs={12}>
@@ -39,14 +42,14 @@ const HomePage = () => {
                         </Grid>
                         <Grid item xs={12}>
                             <Typography>
-                                <h4>Making The Legislative Process Make Sense</h4>
+                                <h3></h3>
                             </Typography>
                         </Grid>
                     </Grid>
                 </div>
-                <Footer/>
-            </ThemeProvider>
-        </div>
+            </div>
+            <Footer/>
+        </ThemeProvider>
     );
 }
 

@@ -1,6 +1,6 @@
 import React from "react";
 import {AppBar as MuiAppBar, Toolbar, IconButton, Button, makeStyles, Grid, ThemeProvider,} from "@material-ui/core";
-import { Link } from "react-router-dom";
+import {Link} from "react-router-dom";
 import QP_Logo from "../../static/images/logos/QP-Logo.png";
 import theme from "./Theme";  // Import your custom theme here
 
@@ -23,6 +23,7 @@ const useStyles = makeStyles((theme) => ({
 
 const AppBar = () => {
     const classes = useStyles();
+    const baseUrl = process.env.BASE_URL || "http://localhost:8000";
 
     return (
         <ThemeProvider theme={theme}>  {/* Wrap the component with the ThemeProvider */}
@@ -38,6 +39,10 @@ const AppBar = () => {
                         </Button>
                     </Grid>
                     <Grid container justifyContent="flex-end" alignItems="center">
+                        <Button color="inherit"
+                                onClick={() => window.location.href = `${baseUrl}/accounts/twitter/login/`}>
+                            Sign Up with Twitter
+                        </Button>
                         <Button color="inherit" component={Link} to="/bills">
                             Bills
                         </Button>

@@ -4,20 +4,25 @@ html, body {
     width: 100%;
     margin: 0;
     padding: 0;
+    background-color: #076AE0;
+    color: #FFFFFF;
+    font-family: 'Bebas Neue', cursive;
 }
 
 #main {
-    position: fixed;
-    width: 100%;
     height: 100%;
+    display: flex;
+    flex: 1;
+    justify-content: center;
     left: 0;
     top: 0;
 }
 
 #app {
-    height: 100%;
-    width: 100%;
     display: flex;
+    flex-direction: column;
+    height: 100vh;
+    justify-content: center;
 }
 
 .appbar {
@@ -48,11 +53,6 @@ html, body {
     border-radius: 10px;
 }
 
-body {
-    background-color: #076AE0;
-    color: #FFFFFF;
-    font-family: 'Bebas Neue', cursive;
-}
 
 .image-container {
     display: flex;
@@ -70,3 +70,5 @@ body {
 .smaller-image {
     width: 25%;
 }
+
+

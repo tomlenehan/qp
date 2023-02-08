@@ -3,9 +3,9 @@ import {Pagination} from '@material-ui/lab';
 import {makeStyles} from "@material-ui/core";
 import theme from './Theme';
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme) => ({
     paginateContainer: {
-        flexGrow: 1,
+        display: 'flex',
         justifyContent: 'center',
     }
 }));

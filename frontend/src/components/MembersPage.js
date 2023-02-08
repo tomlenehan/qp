@@ -16,13 +16,7 @@ const useStyles = makeStyles((theme) => ({
         flexGrow: 1,
         overflowY: 'scroll',
         justifyContent: 'center',
-    },
-    card: {
-        maxWidth: 245,
-        margin: theme.spacing(2),
-    },
-    media: {
-        height: 200,
+        height: '100vh',
     },
     searchContainer: {
         display: 'flex',
@@ -34,6 +28,14 @@ const useStyles = makeStyles((theme) => ({
         backgroundColor: '0862CF',
         marginRight: '1rem',
         width: '50%',
+        boxShadow: '0px 3px 1px -2px rgb(0 0 0 / 20%), 0px 2px 2px 0px rgb(0 0 0 / 14%), 0px 1px 5px 0px rgb(0 0 0 / 12%)',
+    },
+    card: {
+        maxWidth: 245,
+        margin: theme.spacing(2),
+    },
+    media: {
+        height: 200,
     },
 }));
 
@@ -90,9 +92,9 @@ const MembersPage = (props) => {
     }, []);
 
     return (
-        <div className={classes.root}>
-            <AppBar/>
-            <ThemeProvider theme={theme}>
+        <ThemeProvider theme={theme}>
+            <div className={classes.root}>
+                <AppBar/>
                 <form className={classes.searchContainer} onSubmit={handleSubmit}>
                     <TextField
                         className={classes.searchBar}
@@ -142,16 +144,17 @@ const MembersPage = (props) => {
                             </Grid>
                         ))}
                     </Grid>
-
                 }
+            </div>
+            <div>
                 <PaginationControl
                     pageNumbers={pageNumbers}
                     currentPage={currentPage}
                     onPageChange={handlePageChange}
                 />
                 <Footer/>
-            </ThemeProvider>
-        </div>
+            </div>
+        </ThemeProvider>
     );
 };
 export default MembersPage;

@@ -23,6 +23,7 @@ urlpatterns = [
     path('', include('frontend.urls')),
     path('main/', include('main.urls')),
     path('api/', include('api.urls')),
+    path('accounts/', include('allauth.urls')),
     path('admin/', admin.site.urls),
     # for maintenance
     # path('', serve, {'document_root': settings.STATIC_ROOT, 'path': '/html/coming_soon.html'}),

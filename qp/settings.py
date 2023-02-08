@@ -37,7 +37,8 @@ ALLOWED_HOSTS = ['127.0.0.1',
                  '0.0.0.0',
                  'localhost',
                  'questionpolitics.org',
-                 'www.questionpolitics.org']
+                 'www.questionpolitics.org',
+                 'dev.questionpolitics.org']
 
 # Application definition
 
@@ -48,9 +49,14 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
     'main.apps.ApiConfig',
     'rest_framework',
     'frontend.apps.FrontendConfig',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.twitter',
 ]
 
 MIDDLEWARE = [
@@ -76,6 +82,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.request',
             ],
         },
     },
@@ -113,6 +120,15 @@ AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
+]
+
+
+AUTHENTICATION_BACKENDS = [
+    # Needed to login by username in Django admin, regardless of `allauth`
+    'django.contrib.auth.backends.ModelBackend',
+
+    # `allauth` specific authentication methods, such as login by e-mail
+    'allauth.account.auth_backends.AuthenticationBackend',
 ]
 
 # Login settings
@@ -160,6 +176,25 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Debug Toolbar settings
 INTERNAL_IPS = ('127.0.0.1', 'your-ip-address')
+
+SITE_ID = 1
+
+# Settings for Django All Auth
+SOCIALACCOUNT_PROVIDERS = {
+    'twitter': {
+        'SCOPE': ['email'],
+        'AUTH_PARAMS': {
+            'auth_type': 'reauthenticate'
+        },
+        'METHOD': 'oauth',
+        'LOCATION': 'https://api.twitter.com/1.1/account/verify_credentials.json'
+    }
+}
+
+BASE_URL = 'http://localhost:8000'
+
+SOCIALACCOUNT_QUERY_EMAIL = True
+ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
 
 # Put API credentials here
 PROPUBLICA_API_KEY = os.getenv('PROPUBLICA_API_KEY')
